@@ -6,6 +6,8 @@
 from fastapi import FastAPI
 from pydantic import BaseModel  # 입력 데이터 유효성 검사용
 from typing import Optional
+import base64
+import json
 
 # ----------------------------------------
 # FastAPI 앱 인스턴스 생성
@@ -16,6 +18,15 @@ app = FastAPI(
     description="말벌 탐색 서비스 restful api",
     version="1.0.0"
 )
+
+
+def get_spectogram() :
+    encoded_data = ""
+    with open("./output_Hornet_1_Hornet_1_0000.png", "rb") as f:
+        encoded_data = base64.b64encode(f.read()).decode("utf-8")
+    
+    return encoded_data
+
 
 # ----------------------------------------
 # 기본 엔드포인트 (GET 요청)
@@ -52,7 +63,7 @@ def predict_sound(item: PredictItem):
     print("/v1/predict")
     print(f"device_id={item.device_id}, event_time={item.event_time}")
 
-    spectrogram_base64 = ""
+    spectrogram_base64 = get_spectogram() 
 
     return {
         "status": 200,
@@ -118,7 +129,7 @@ def get_predictions(device_id: str,prediction_seq: int ):
     print("/v1/prediction")
     print(f"device_id={device_id}, prediction_seq={prediction_seq}")
 
-    spectrogram_base64 = ""
+    spectrogram_base64 = get_spectogram() 
 
 
     return {

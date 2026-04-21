@@ -1,0 +1,10 @@
+nohup.out
+hornet_report/
+uvicorn.log
+firebase_credentials.json
+firebase_credentials*.json
+best_model.keras
+*.keras
+*.pyc
+__pycache__/
+.git

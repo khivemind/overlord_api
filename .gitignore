@@ -4,6 +4,7 @@ uvicorn.log
 firebase_credentials.json
 firebase_credentials*.json
 best_model.keras
+output_Hornet_1_Hornet_1_0000.png
 *.keras
 *.pyc
 __pycache__/
